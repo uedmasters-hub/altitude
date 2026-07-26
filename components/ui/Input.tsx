@@ -25,7 +25,7 @@ export function Input({ label, icon, style, ...rest }: InputProps) {
         <TextInput
           style={[styles.input, icon ? styles.inputWithIcon : undefined, style]}
           placeholderTextColor={colors.textTertiary}
-          selectionColor={colors.accent}
+          selectionColor={colors.primary}
           {...rest}
         />
       </View>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.primarySoft,
+    backgroundColor: colors.borderLight,
     borderRadius: radii.md,
     minHeight: 48,
   },

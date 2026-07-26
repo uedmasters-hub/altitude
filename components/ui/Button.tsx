@@ -5,7 +5,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 import { Text } from './Text';
-import { colors, spacing, radii, typography } from '../../constants/tokens';
+import { colors, spacing, radii, opacity } from '../../constants/tokens';
 
 type Variant = 'primary' | 'secondary' | 'ghost';
 type Size = 'md' | 'lg';
@@ -17,6 +17,8 @@ interface ButtonProps {
   size?: Size;
   disabled?: boolean;
   loading?: boolean;
+  /** Use pill shape (full radius) — for primary CTAs at bottom of screen */
+  rounded?: boolean;
   style?: ViewStyle;
 }
 
@@ -27,6 +29,7 @@ export function Button({
   size = 'lg',
   disabled = false,
   loading = false,
+  rounded = false,
   style,
 }: ButtonProps) {
   const isDisabled = disabled || loading;
@@ -39,6 +42,7 @@ export function Button({
         styles.base,
         styles[size],
         styles[variant],
+        { borderRadius: rounded ? radii.full : radii.md },
         pressed && !isDisabled && styles[`${variant}Pressed`],
         isDisabled && styles.disabled,
         style,
@@ -66,7 +70,6 @@ const styles = StyleSheet.create({
   base: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: radii.md,
   },
 
   // Sizes
@@ -84,13 +87,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
   },
   primaryPressed: {
-    backgroundColor: '#333333',
+    backgroundColor: colors.primaryPressed,
   },
   secondary: {
     backgroundColor: colors.primarySoft,
   },
   secondaryPressed: {
-    backgroundColor: colors.border,
+    backgroundColor: colors.primarySoftPressed,
   },
   ghost: {
     backgroundColor: 'transparent',
@@ -100,6 +103,6 @@ const styles = StyleSheet.create({
   },
 
   disabled: {
-    opacity: 0.4,
+    opacity: opacity.disabled,
   },
 });

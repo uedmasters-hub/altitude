@@ -1,7 +1,7 @@
 import { View, StyleSheet, type ViewProps } from 'react-native';
-import { colors, spacing, radii } from '../../constants/tokens';
+import { colors, spacing, radii, shadows } from '../../constants/tokens';
 
-type Elevation = 'flat' | 'raised' | 'overlay';
+type Elevation = 'flat' | 'raised' | 'floating' | 'overlay';
 
 interface SurfaceProps extends ViewProps {
   elevation?: Elevation;
@@ -20,7 +20,7 @@ export function Surface({
       style={[
         styles.base,
         padded && styles.padded,
-        styles[elevation],
+        elevationStyles[elevation],
         style,
       ]}
       {...rest}
@@ -38,23 +38,20 @@ const styles = StyleSheet.create({
   padded: {
     padding: spacing.md,
   },
+});
 
+const elevationStyles = StyleSheet.create({
   flat: {
     borderWidth: 1,
     borderColor: colors.borderLight,
   },
   raised: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
+    ...shadows.card,
+  },
+  floating: {
+    ...shadows.floating,
   },
   overlay: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.1,
-    shadowRadius: 24,
-    elevation: 8,
+    ...shadows.sheet,
   },
 });

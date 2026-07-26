@@ -4,9 +4,9 @@ import { colors, spacing, radii } from '../../constants/tokens';
 import type { RecommendationTag } from '../../types';
 
 const tagConfig: Record<RecommendationTag, { bg: string; fg: string; label: string }> = {
-  bestValue: { bg: '#F3F0FF', fg: colors.bestValue, label: 'Best value' },
-  cheapest: { bg: colors.successSoft, fg: colors.cheapest, label: 'Cheapest' },
-  fastest: { bg: colors.accentSoft, fg: colors.fastest, label: 'Fastest' },
+  bestValue: { bg: colors.primarySoft, fg: colors.bestValue, label: 'Best value' },
+  cheapest: { bg: colors.cheapestSoft, fg: colors.cheapest, label: 'Cheapest' },
+  fastest: { bg: colors.fastestSoft, fg: colors.fastest, label: 'Fastest' },
 };
 
 interface TagProps {

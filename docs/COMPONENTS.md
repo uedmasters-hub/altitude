@@ -23,42 +23,45 @@ Typed wrapper over RN Text. Never import `Text` from `react-native` in screens.
 | align | left, center, right | left | — |
 
 ```tsx
-<Text variant="display">Where to?</Text>
-<Text variant="caption" color="textSecondary">Non-stop</Text>
+<Text variant="display">Where are you flying next?</Text>
+<Text variant="caption" color="textSecondary">Non-stop · 2h 25m</Text>
 ```
 
 ### Button
 
-One primary button per screen. Full-width by default for thumb-first.
+One primary button per screen. Purple (#7C3AED) primary. Full-width for thumb-first CTAs.
 
 | Prop | Type | Default |
 |------|------|---------|
 | variant | primary, secondary, ghost | primary |
 | size | md (44px), lg (52px) | lg |
+| rounded | boolean | false |
 | loading | boolean | false |
 | disabled | boolean | false |
+
+Primary CTA buttons use `rounded` (pill shape) as seen on onboarding, calendar, and booking screens. Non-CTA buttons use default `md` radius.
 
 States: default, pressed, disabled, loading.
 
 ```tsx
-<Button label="Search flights" onPress={search} />
+<Button label="Continue" onPress={next} rounded />             // primary pill CTA
+<Button label="Search flights" onPress={search} />             // primary rect
 <Button label="Change dates" onPress={edit} variant="secondary" />
 <Button label="Skip" onPress={skip} variant="ghost" size="md" />
 ```
 
 ### Surface
 
-Card container. Cards represent meaningful objects (destination, flight, recommendation) — never dashboards.
+Card container. Four elevation levels matching shadow tokens.
 
 | Prop | Type | Default |
 |------|------|---------|
-| elevation | flat, raised, overlay | flat |
+| elevation | flat, raised, floating, overlay | flat |
 | padded | boolean | true |
 
 ```tsx
-<Surface elevation="raised">
-  <Text variant="h2">Delhi → Goa</Text>
-</Surface>
+<Surface elevation="raised">           {/* flight cards */}
+<Surface elevation="floating">         {/* search bar */}
 ```
 
 ### Screen
@@ -70,37 +73,30 @@ Safe-area wrapper enforcing thumb-first layout. Every screen wraps content in th
 | anchor | bottom, top | bottom |
 | edges | safe area edges array | ['top'] |
 
-Bottom anchor (default) pushes content to the bottom third. Use `top` for scrollable lists.
-
 ```tsx
 <Screen>               {/* content at bottom */}
-<Screen anchor="top">  {/* scrollable list */}
+<Screen anchor="top">  {/* scrollable list (airport search) */}
 ```
 
 ### Input
 
-Text input with optional label and icon.
+Text input with optional label and icon. Background uses `borderLight` (gray100).
 
-| Prop | Type | Default |
-|------|------|---------|
-| label | string | — |
-| icon | ReactNode | — |
-
-States: default, focused, filled, error, disabled. Search is the primary input pattern throughout the product.
+States: default, focused, filled, error, disabled.
 
 ```tsx
-<Input placeholder="Search airports" />
-<Input label="From" placeholder="Delhi (DEL)" icon={<PlaneIcon />} />
+<Input placeholder="Where to next?" icon={<SearchIcon />} />
+<Input label="From" placeholder="Delhi (DEL)" />
 ```
 
 ### Tag
 
-Recommendation badges tied to `RecommendationTag` type. Concise and non-interactive.
+Recommendation badges. Colors match screen designs:
 
 ```tsx
-<Tag tag="bestValue" />   {/* purple "Best value" */}
-<Tag tag="cheapest" />    {/* green "Cheapest" */}
-<Tag tag="fastest" />     {/* blue "Fastest" */}
+<Tag tag="bestValue" />   {/* purple — primary50 bg */}
+<Tag tag="cheapest" />    {/* orange — warningLight bg */}
+<Tag tag="fastest" />     {/* blue — infoLight bg */}
 ```
 
 ### Row
@@ -109,60 +105,68 @@ Horizontal layout with gap control.
 
 ```tsx
 <Row gap="md" justify="space-between">
-  <Text>DEL → BOM</Text>
-  <Text variant="bodyMedium">₹4,200</Text>
+  <Text>DEL → BLR</Text>
+  <Text variant="bodyLarge" style={{ color: colors.deal }}>$750</Text>
 </Row>
 ```
 
 ### ListRow
 
-Pressable row for lists (airports, flights). Large touch targets, consistent spacing.
+Pressable row for airport list. Large touch targets, consistent spacing.
 
 ```tsx
 <ListRow onPress={() => selectAirport(airport)}>
-  <Text variant="bodyMedium">{airport.city}</Text>
-  <Text variant="caption" color="textSecondary">{airport.iata}</Text>
+  <Text variant="bodyMedium">Delhi (DEL)</Text>
 </ListRow>
 ```
 
 ### Divider
 
-Hairline separator. Prefer whitespace over separators — use only when groups need visual distinction.
-
-```tsx
-<Divider />
-<Divider spacing="lg" />
-```
+Hairline separator. Prefer whitespace over separators.
 
 ---
 
 ## Planned components (not yet built)
 
-These will be implemented as screens require them.
+Build these when the screen that needs them is being implemented.
 
-**Bottom Sheet** — preferred over full-screen for selection workflows (airport search, passenger selection, cabin class, fare details). Supports collapsed, half-expanded, and fully expanded. Animates from bottom, follows gesture.
+**Bottom Sheet** — preferred over full-screen for selection workflows (airport search, passenger selection, cabin class, fare details). Supports collapsed, half-expanded, fully expanded. Animates from bottom, follows drag gesture.
 
-**Calendar** — standard monthly grid for date selection. Enhanced with fare highlights, not replaced. Supports single date and range.
+**Calendar** — standard monthly grid. Selected date: purple filled circle (`primary`). Cheapest dates: orange outline circle (`deal`). Month transitions animate smoothly. Bottom CTA: "Continue" (pill).
 
-**Stepper** — increment/decrement control for passenger counts. No dropdowns.
+**Date Strip** — horizontal scrollable row of dates with prices underneath. Selected date: purple background pill. Prices use `deal` color. Used at top of flight results.
 
-**Skeleton Loader** — loading placeholder matching content shape. Preferred over spinners.
+**Cheapest Dates Strip** — horizontal scrollable row showing cheapest dates across months. Day abbreviation + date + price in orange. Used on date selection screen.
 
-**Toast** — short feedback ("Saved", "Copied"). Disappears automatically, never requires interaction.
+**Price Histogram** — bar chart showing fare trends across months. Selected bar uses purple (`primary`). Gray bars for other dates. Used on date selection screen.
 
-**Dialog** — confirmation only (cancel booking, discard changes). Always provides primary and secondary action.
+**Flight Card** — dashed-border timeline card showing departure → arrival. Includes airline logo, flight number, times with terminal codes, "Direct" / stops indicator, duration. Strikethrough original price + deal price in orange.
 
-**Accordion** — reveals secondary info (fare rules, baggage, cancellation). Collapsed by default.
+**Destination Card** — image card with text overlay (bottom-left). Title + subtitle over gradient. Used in "Weekend Escapes" section. Radius: `lg`.
+
+**Greeting Bar** — top bar with avatar, greeting text ("Hello, Ramesh"), weather widget, notification bell. Home screen only.
+
+**Bottom Tab Navigation** — 4 tabs: Explore, Trips, Saved, Account. Icon + label per tab. Active tab uses `primary` color.
+
+**Alphabet Scrubber** — right-edge letter index for fast-scrolling through airport list. Letters A-Z. Bold active letter.
+
+**Stepper** — increment/decrement for passenger counts. No dropdowns.
+
+**Skeleton Loader** — loading placeholder. Preferred over spinners.
+
+**Toast** — short feedback. Disappears automatically.
+
+**Dialog** — confirmation only. Two actions always.
 
 ---
 
 ## Component rules
 
-- One primary button per screen
+- One primary button per screen, using pill shape (`rounded`) for the main CTA
 - Cards don't become dashboards — one object per card
-- Lists avoid unnecessary separators — whitespace is preferred
+- Lists avoid unnecessary separators — whitespace preferred
 - Every interactive element needs a visible focus state
 - Every icon-only action needs an accessible label
-- Loading: skeleton loaders over spinners
-- Empty states answer: what happened? What should I do?
-- Error states answer: what went wrong? What can I do next?
+- Skeleton loaders over spinners
+- Empty states: what happened + what to do
+- Error states: what went wrong + what can I do
