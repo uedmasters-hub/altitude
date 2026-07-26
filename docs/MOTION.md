@@ -1,235 +1,65 @@
 # Motion
 
-> Project Altitude Motion Guidelines
->
-> Version: 0.1 (MVP)
+Animation communicates change. If an animation doesn't improve clarity, maintain context, or provide feedback — it shouldn't exist.
 
 ---
 
-# Purpose
+## Principles
 
-Motion helps users understand changes within the interface.
-
-Animations should improve clarity, maintain context, and provide feedback.
-
-If an animation does not improve the experience, it should not exist.
+Purposeful, fast, subtle, consistent, and optional (respects reduced motion).
 
 ---
 
-# Principles
+## Durations
 
-Motion should be:
+| Token | Duration | Usage |
+|-------|--------:|-------|
+| instant | 100ms | Press feedback, toggles |
+| fast | 150ms | Micro-interactions, hover |
+| normal | 250ms | Screen transitions, sheets opening |
+| slow | 350ms | Complex reveals, expanding content |
+| extraSlow | 500ms | Onboarding moments |
 
-- Purposeful
-- Fast
-- Subtle
-- Consistent
-- Optional
-
-Avoid decorative animations.
-
----
-
-# Motion Guidelines
-
-## Reinforce Change
-
-Use animation to communicate changes in state.
-
-Examples
-
-- Opening a bottom sheet
-- Selecting a date
-- Loading search results
-- Completing a booking
+Most interface animations complete within 150–300ms. Easing: ease-out for all transitions.
 
 ---
 
-## Maintain Context
+## Standard transitions
 
-Elements should transition naturally between states.
+**Fade** — toasts, alerts, empty states.
 
-Avoid sudden jumps or unexpected movement.
+**Slide up** — bottom sheets, keyboard-related content, action panels.
 
----
+**Slide down** — dismissing overlays, closing sheets.
 
-## Guide Attention
-
-Motion should draw attention to the next important action.
-
-Avoid animating multiple elements simultaneously.
-
----
-
-## Keep It Fast
-
-Most interface animations should complete within 150–300ms.
-
-Avoid slow transitions that delay user interaction.
-
----
-
-# Motion Durations
-
-| Token | Duration |
-|--------|---------:|
-| Instant | 100ms |
-| Fast | 150ms |
-| Normal | 250ms |
-| Slow | 350ms |
-| Extra Slow | 500ms |
-
----
-
-# Standard Transitions
-
-## Fade
-
-Use for:
-
-- Toasts
-- Alerts
-- Empty states
-
----
-
-## Slide Up
-
-Use for:
-
-- Bottom sheets
-- Keyboard-related content
-- Action panels
-
----
-
-## Slide Down
-
-Use for:
-
-- Dismissing overlays
-- Closing bottom sheets
-
----
-
-## Scale
-
-Use sparingly for:
-
-- Dialog appearance
-- Selection feedback
-
-Avoid excessive scaling.
-
----
-
-# Component Motion
-
-## Buttons
-
-Animate:
-
-- Press
-- Release
-- Loading
+**Scale** — dialog appearance, selection feedback. Use sparingly.
 
 Avoid bounce effects.
 
 ---
 
-## Bottom Sheets
+## Component-specific motion
 
-Animate from the bottom.
+**Buttons:** animate press and release. Show loading state (spinner replacing label) with fade. No bounce.
 
-Support:
+**Bottom sheets:** animate from bottom. Follow user's drag gesture. Support open, drag, and close.
 
-- Open
-- Drag
-- Close
+**Search:** focus input, open keyboard, reveal results smoothly. No separate screen transition.
 
-Movement should follow the user's gesture.
+**Lists:** animate only when items are added, removed, or reordered. Scrolling stays native.
 
----
+**Calendar:** smooth month-change transition. Immediate visual feedback on date selection.
 
-## Search
-
-When activated:
-
-- Focus input
-- Open keyboard
-- Reveal results smoothly
-
-Avoid unnecessary screen transitions.
+**Loading:** skeleton loaders with a subtle shimmer pulse. Full-screen spinners only as last resort.
 
 ---
 
-## Lists
+## Feedback animations
 
-Animate only when items are:
-
-- Added
-- Removed
-- Reordered
-
-Scrolling should remain natural.
+Subtle motion for successful actions, errors, and state changes. Avoid celebratory or decorative animation.
 
 ---
 
-## Calendar
+## Reduced motion
 
-Animate month changes smoothly.
-
-Date selection should provide immediate visual feedback.
-
----
-
-## Loading States
-
-Prefer skeleton loading.
-
-If using a spinner, display it only when necessary.
-
-Avoid full-screen loading animations.
-
----
-
-# Feedback Animations
-
-Use subtle motion for:
-
-- Successful actions
-- Errors
-- State changes
-
-Examples
-
-- Booking confirmed
-- Payment completed
-- Item saved
-
-Avoid celebratory animations.
-
----
-
-# Reduced Motion
-
-Respect the user's system preference for reduced motion.
-
-When enabled:
-
-- Reduce non-essential animations
-- Remove decorative transitions
-- Preserve essential feedback
-
----
-
-# Motion Checklist
-
-Before adding an animation, ask:
-
-- Does it explain a state change?
-- Does it maintain context?
-- Is it fast enough?
-- Can users interact immediately?
-- Does it respect reduced motion settings?
-- Would removing it make the experience worse?
+Respect the system preference. When enabled: remove non-essential animations, preserve essential feedback (loading indicators, state changes). The interface must remain fully usable with all animation disabled.

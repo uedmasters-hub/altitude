@@ -1,274 +1,139 @@
 # Design Decisions
 
-> Project Altitude Design Decisions
->
-> Version: 0.1 (MVP)
+Significant design decisions and their rationale. Update status when decisions are superseded or deprecated — never delete history.
 
 ---
 
-# Purpose
+## DD-001: Traditional calendar for date selection
 
-This document records significant design decisions made during the development of Project Altitude.
+**Status:** Accepted
 
-Each decision captures:
+**Context:** Many travel products experiment with alternative date pickers, increasing learning curve.
 
-- The problem
-- The decision
-- The rationale
-- The impact
+**Decision:** Use a familiar monthly calendar. Enhance with fare insights rather than replacing the interaction.
 
-Document decisions that influence the user experience or design system. Avoid recording minor visual changes.
+**Rationale:** Users already understand calendars. Familiarity reduces cognitive load and speeds up task completion.
 
 ---
 
-# Template
+## DD-002: Bottom-anchored airport search
 
-## DD-XXX: Decision Title
+**Status:** Accepted
 
-**Status**
+**Context:** Traditional search places the field at top of screen, requiring users to reach away from the keyboard.
 
-Accepted | Proposed | Deprecated | Superseded
+**Decision:** Anchor search input near the bottom. Airport list expands upward.
 
-**Date**
-
-YYYY-MM-DD
-
-### Context
-
-What problem or opportunity prompted this decision?
-
-### Decision
-
-Describe the chosen approach.
-
-### Rationale
-
-Explain why this approach was selected over alternatives.
-
-### Impact
-
-Describe how this affects the product, users, or future design decisions.
+**Rationale:** Keeps search within natural thumb reach. Reduces unnecessary hand movement.
 
 ---
 
-# Decisions
+## DD-003: Recommendation before comparison
 
-## DD-001: Keep a Traditional Calendar
+**Status:** Accepted
 
-**Status**
+**Context:** Traditional flight booking shows long lists requiring users to compare multiple attributes.
 
-Accepted
+**Decision:** Present recommended journeys first, followed by alternatives.
 
-### Context
-
-Many travel products experiment with alternative date pickers, increasing the learning curve for users.
-
-### Decision
-
-Use a familiar monthly calendar for date selection.
-
-Enhance the experience with fare insights rather than replacing the interaction.
-
-### Rationale
-
-Users already understand calendars. Familiarity reduces cognitive load and speeds up task completion.
-
-### Impact
-
-- Lower learning curve
-- Faster date selection
-- Easier adoption for new users
+**Rationale:** Recommendation-driven experiences reduce decision fatigue while still allowing exploration.
 
 ---
 
-## DD-002: Bottom-Anchored Airport Search
+## DD-004: Progressive disclosure
 
-**Status**
+**Status:** Accepted
 
-Accepted
+**Context:** Displaying all options at once overwhelms users.
 
-### Context
+**Decision:** Reveal information and controls only when they become relevant.
 
-Traditional search experiences place the search field at the top of the screen, requiring users to reach away from the keyboard.
-
-### Decision
-
-Anchor the search input near the bottom while the airport list expands upward.
-
-### Rationale
-
-This keeps search within natural thumb reach and reduces unnecessary hand movement.
-
-### Impact
-
-- Better one-handed usability
-- Faster airport selection
-- More ergonomic interaction
+**Rationale:** Users focus on completing one step at a time. Simpler screens, better task completion.
 
 ---
 
-## DD-003: Recommendation Before Comparison
+## DD-005: One primary action per screen
 
-**Status**
+**Status:** Accepted
 
-Accepted
+**Context:** Multiple competing CTAs make it hard to identify the next step.
 
-### Context
+**Decision:** Each screen emphasizes a single primary action.
 
-Traditional flight booking interfaces present long lists of options, requiring users to compare multiple attributes.
-
-### Decision
-
-Present a recommended journey first, followed by alternative options.
-
-### Rationale
-
-Recommendation-driven experiences reduce decision fatigue while still allowing users to explore alternatives.
-
-### Impact
-
-- Lower cognitive load
-- Faster booking decisions
-- Clearer visual hierarchy
+**Rationale:** Clear next step improves confidence and reduces hesitation.
 
 ---
 
-## DD-004: Progressive Disclosure
+## DD-006: Bottom sheets for selection workflows
 
-**Status**
+**Status:** Accepted
 
-Accepted
+**Context:** Selection tasks interrupt flow when presented as separate screens.
 
-### Context
+**Decision:** Use bottom sheets for airport search, passenger selection, cabin class, fare details.
 
-Displaying all available options at once can overwhelm users.
-
-### Decision
-
-Reveal information and controls only when they become relevant.
-
-### Rationale
-
-Users should focus on completing one step at a time.
-
-### Impact
-
-- Simpler screens
-- Improved task completion
-- Reduced information overload
+**Rationale:** Bottom sheets preserve context while reducing navigation depth.
 
 ---
 
-## DD-005: One Primary Action Per Screen
+## DD-007: Recommendation over feature density
 
-**Status**
+**Status:** Accepted
 
-Accepted
+**Context:** Travel apps compete by adding more filters and comparison tools.
 
-### Context
+**Decision:** Prioritize guidance and recommendations over feature-heavy interfaces.
 
-Multiple competing calls-to-action make it difficult for users to identify the next step.
-
-### Decision
-
-Each screen should emphasise a single primary action.
-
-### Rationale
-
-A clear next step improves confidence and reduces hesitation.
-
-### Impact
-
-- Better navigation flow
-- Improved usability
-- Consistent interaction patterns
+**Rationale:** Helping users decide is more valuable than presenting every option. Stronger product differentiation.
 
 ---
 
-## DD-006: Bottom Sheets for Selection
+## DD-008: Flight-first MVP
 
-**Status**
+**Status:** Accepted
 
-Accepted
+**Context:** Project Altitude aims to become a broader travel platform, but expanding MVP would increase complexity.
 
-### Context
+**Decision:** Limit MVP to end-to-end flight booking only.
 
-Selection tasks often interrupt the user's flow when presented as separate screens.
-
-### Decision
-
-Use bottom sheets for lightweight selection workflows such as airports, passengers, and cabin class.
-
-### Rationale
-
-Bottom sheets preserve context while reducing navigation.
-
-### Impact
-
-- Fewer screen transitions
-- Faster interactions
-- Improved continuity
+**Rationale:** Focused scope enables faster iteration and validates the core experience before expanding.
 
 ---
 
-## DD-007: Recommendation Over Feature Density
+## DD-009: Purple primary color
 
-**Status**
+**Status:** Accepted
 
-Accepted
+**Context:** Needed a brand color that feels premium and calm without competing with semantic colors (green/red/amber).
 
-### Context
+**Decision:** Purple (#7C3AED) as the primary interactive color. Neutrals compose 90% of the interface.
 
-Many travel apps compete by adding more filters, offers, and comparison tools, increasing interface complexity.
-
-### Decision
-
-Prioritise guidance and recommendations over feature-heavy interfaces.
-
-### Rationale
-
-Helping users decide is more valuable than presenting every possible option.
-
-### Impact
-
-- Cleaner interface
-- Reduced decision fatigue
-- Stronger product differentiation
+**Rationale:** Purple sits outside the semantic color space (success/warning/error), avoiding confusion. Reads as premium without being loud. Works well at both full and soft (tinted background) applications.
 
 ---
 
-## DD-008: Flight-First MVP
+## DD-010: No external UI libraries
 
-**Status**
+**Status:** Accepted
 
-Accepted
+**Context:** Libraries like RN Paper, Tamagui, or NativeWind could accelerate development.
 
-### Context
+**Decision:** Build all components from design tokens. No external UI dependencies.
 
-Project Altitude aims to become a broader travel platform, but expanding the MVP would increase complexity and delay validation.
-
-### Decision
-
-Limit the MVP to the end-to-end flight booking experience.
-
-### Rationale
-
-A focused scope enables faster iteration and validates the core booking experience before expanding into other travel services.
-
-### Impact
-
-- Faster delivery
-- Clearer product direction
-- Easier user testing
+**Rationale:** The design language is custom. A library would fight it, and every override erodes the consistency benefit the library was supposed to provide. Hand-built primitives stay small and fully controlled.
 
 ---
 
-# Decision Lifecycle
+*To add a new decision: copy the template below, assign the next DD number, and append to the list.*
 
-Design decisions should be updated when they are:
+```
+## DD-XXX: Title
 
-- Superseded by a better approach
-- Deprecated due to product evolution
-- No longer applicable
+**Status:** Accepted | Proposed | Deprecated | Superseded
 
-Do not delete historical decisions. Update their status and reference the replacement where appropriate.
+**Context:** What problem or opportunity prompted this?
+
+**Decision:** What was chosen?
+
+**Rationale:** Why this approach over alternatives?
+```

@@ -1,359 +1,258 @@
 # Design Tokens
 
-> Project Altitude Design Tokens
->
-> Version: 0.1 (MVP)
+Every visual value used in Project Altitude. Components consume these tokens — never hardcoded values. The source of truth in code is `constants/tokens.ts`.
 
 ---
 
-# Overview
+## Typography
 
-Design Tokens define the foundational visual properties used throughout Project Altitude.
-
-Every screen, component, and interaction should reference these tokens instead of hardcoded values.
-
-This ensures consistency, scalability, and easier maintenance.
-
----
-
-# Typography
-
-## Font Family
+### Font
 
 | Token | Value |
-|--------|-------|
+|-------|-------|
 | Primary | Inter |
 | Fallback | System UI |
 
----
-
-## Font Weights
+### Weights
 
 | Token | Weight | Usage |
-|--------|-------:|-------|
-| Regular | 400 | Body copy |
-| Medium | 500 | Labels, Buttons |
+|-------|-------:|-------|
+| Regular | 400 | Body text |
+| Medium | 500 | Labels, buttons |
 | Semibold | 600 | Headings |
-| Bold | 700 | Hero text |
+| Bold | 700 | Display text |
+
+### Type scale
+
+| Token | Size | Line height | Weight | Usage |
+|-------|-----:|------------:|--------|-------|
+| display | 32 | 40 | 700 | Screen hero ("Where to?") |
+| h1 | 24 | 32 | 600 | Screen headings |
+| h2 | 20 | 28 | 600 | Section titles, card titles |
+| bodyLarge | 18 | 28 | 400 | Featured text, prices |
+| body | 16 | 24 | 400 | Default text |
+| bodyMedium | 16 | 24 | 500 | Emphasized body |
+| bodySmall | 14 | 20 | 400 | Supporting text |
+| caption | 12 | 16 | 400 | Labels, metadata |
+| label | 12 | 16 | 500 | Tags, form labels |
+
+Letter spacing: display uses -0.5, h1 uses -0.3. All others default.
 
 ---
 
-## Type Scale
+## Colors
 
-| Token | Size | Line Height | Usage |
-|--------|-----:|------------:|-------|
-| Display XL | 48 | 56 | Marketing |
-| Display | 40 | 48 | Hero |
-| H1 | 32 | 40 | Page Titles |
-| H2 | 28 | 36 | Section Titles |
-| H3 | 24 | 32 | Screen Heading |
-| Title | 20 | 28 | Cards |
-| Body Large | 18 | 28 | Featured Text |
-| Body | 16 | 24 | Default |
-| Body Small | 14 | 20 | Secondary |
-| Caption | 12 | 16 | Labels |
+### Neutral
 
----
+| Token | Hex | Usage |
+|-------|---------|-------|
+| white | #FFFFFF | Cards, surfaces |
+| gray50 | #FAFAFA | App background |
+| gray100 | #F5F5F5 | Input backgrounds, soft fills |
+| gray200 | #E5E5E5 | Borders, dividers |
+| gray300 | #D4D4D4 | Subtle borders |
+| gray400 | #A3A3A3 | Disabled text |
+| gray500 | #737373 | Tertiary text, placeholders |
+| gray600 | #525252 | Secondary text |
+| gray700 | #404040 | — |
+| gray800 | #262626 | Primary text |
+| gray900 | #171717 | Heading text |
+| black | #000000 | — |
 
-# Colour Palette
+### Brand / Primary
 
-## Neutral
+Purple. Used for primary buttons, active states, selected controls, focus, and progress indicators.
 
 | Token | Hex |
-|--------|---------|
-| White | #FFFFFF |
-| Gray 50 | #FAFAFA |
-| Gray 100 | #F5F5F5 |
-| Gray 200 | #E5E5E5 |
-| Gray 300 | #D4D4D4 |
-| Gray 400 | #A3A3A3 |
-| Gray 500 | #737373 |
-| Gray 600 | #525252 |
-| Gray 700 | #404040 |
-| Gray 800 | #262626 |
-| Gray 900 | #171717 |
-| Black | #000000 |
+|-------|---------|
+| primary50 | #F5F3FF |
+| primary100 | #EDE9FE |
+| primary200 | #DDD6FE |
+| primary300 | #C4B5FD |
+| primary400 | #A78BFA |
+| primary500 | #7C3AED |
+| primary600 | #6D28D9 |
+| primary700 | #5B21B6 |
+| primary800 | #4C1D95 |
+| primary900 | #3B0764 |
+
+Default primary: `primary500` (#7C3AED). Pressed state: `primary600`. Soft/background: `primary50`.
+
+### Semantic
+
+| Role | Light | Default | Dark |
+|------|-------|---------|------|
+| Success | #DCFCE7 | #16A34A | #166534 |
+| Warning | #FEF3C7 | #F59E0B | #92400E |
+| Error | #FEE2E2 | #DC2626 | #991B1B |
+| Info | #DBEAFE | #2563EB | #1E40AF |
+
+### Recommendation tags
+
+| Tag | Color | Background |
+|-----|-------|------------|
+| Best value | #7C3AED (primary) | primary50 |
+| Cheapest | #16A34A (success) | success light |
+| Fastest | #2563EB (info) | info light |
+
+### Semantic surface tokens
+
+These are the tokens components should reference (not raw hex):
+
+| Token | Resolves to | Usage |
+|-------|-------------|-------|
+| bg | gray50 | App background |
+| surface | white | Cards, sheets |
+| surfaceRaised | white | Elevated cards |
+| border | gray200 | Visible dividers |
+| borderLight | gray100 | Subtle card borders |
+| text | gray900 | Primary text |
+| textSecondary | gray600 | Supporting text |
+| textTertiary | gray500 | Placeholders, hints |
+| textDisabled | gray400 | Disabled state |
+| textInverse | white | Text on dark/primary backgrounds |
+| primary | primary500 | Buttons, active states |
+| primarySoft | primary50 | Soft button backgrounds |
+| primaryPressed | primary600 | Button pressed state |
+| accent | info default | Links, informational highlights |
+| accentSoft | info light | Accent backgrounds |
+| overlay | black @ 50% | Modal backdrop |
 
 ---
 
-## Brand
+## Spacing
 
-| Token | Hex |
-|--------|---------|
-| Primary 50 | #F5F3FF |
-| Primary 100 | #EDE9FE |
-| Primary 200 | #DDD6FE |
-| Primary 300 | #C4B5FD |
-| Primary 400 | #A78BFA |
-| Primary 500 | #7C3AED |
-| Primary 600 | #6D28D9 |
-| Primary 700 | #5B21B6 |
-| Primary 800 | #4C1D95 |
-| Primary 900 | #3B0764 |
-
----
-
-## Semantic Colours
-
-### Success
-
-| Token | Hex |
-|--------|---------|
-| Light | #DCFCE7 |
-| Default | #16A34A |
-| Dark | #166534 |
-
-### Warning
-
-| Token | Hex |
-|--------|---------|
-| Light | #FEF3C7 |
-| Default | #F59E0B |
-| Dark | #92400E |
-
-### Error
-
-| Token | Hex |
-|--------|---------|
-| Light | #FEE2E2 |
-| Default | #DC2626 |
-| Dark | #991B1B |
-
-### Information
-
-| Token | Hex |
-|--------|---------|
-| Light | #DBEAFE |
-| Default | #2563EB |
-| Dark | #1E40AF |
-
----
-
-# Text Colours
-
-| Token | Usage |
-|--------|-------|
-| Text Primary | Main content |
-| Text Secondary | Supporting content |
-| Text Tertiary | Hints & metadata |
-| Text Disabled | Disabled state |
-| Text Inverse | Dark backgrounds |
-
----
-
-# Surface Colours
-
-| Token | Usage |
-|--------|-------|
-| Background | App background |
-| Surface | Cards |
-| Elevated | Floating elements |
-| Overlay | Modal backdrop |
-| Divider | Borders & separators |
-
----
-
-# Spacing
-
-Project Altitude follows an **8pt Grid System**.
-
-Micro spacing may use **4pt increments**.
-
-| Token | Value |
-|--------|------:|
-| 0 | 0 |
-| 1 | 4 |
-| 2 | 8 |
-| 3 | 12 |
-| 4 | 16 |
-| 5 | 20 |
-| 6 | 24 |
-| 8 | 32 |
-| 10 | 40 |
-| 12 | 48 |
-| 16 | 64 |
-| 20 | 80 |
-| 24 | 96 |
-
----
-
-# Border Radius
+8pt grid. Micro spacing uses 4pt increments.
 
 | Token | Value | Usage |
-|--------|------:|-------|
-| None | 0 | Images |
-| XS | 4 | Inputs |
-| SM | 8 | Chips |
-| MD | 12 | Cards |
-| LG | 16 | Bottom Sheets |
-| XL | 24 | Hero Cards |
-| Full | 999 | Pills |
+|-------|------:|-------|
+| 0 | 0 | — |
+| xs | 4 | Tight gaps inside components |
+| sm | 8 | Inner gaps, list item spacing |
+| md | 16 | Component padding, card gaps |
+| lg | 24 | Screen horizontal padding, component gaps |
+| xl | 32 | Section spacing |
+| xxl | 48 | Bottom safe zone |
+| 3xl | 64 | Large section breaks |
 
----
-
-# Borders
-
-| Token | Width |
-|--------|------:|
-| Thin | 1 |
-| Medium | 2 |
-| Thick | 4 |
-
----
-
-# Elevation
-
-| Level | Usage |
-|-------|-------|
-| 0 | Background |
-| 1 | Cards |
-| 2 | Floating Search |
-| 3 | Bottom Sheets |
-| 4 | Dialogs |
-| 5 | Toasts |
-
----
-
-# Opacity
+### Layout constants
 
 | Token | Value |
-|--------|------:|
-| Disabled | 38% |
-| Secondary | 60% |
-| Overlay | 80% |
+|-------|------:|
+| Screen horizontal padding | 24 |
+| Section gap | 32 |
+| Component gap | 24 |
+| Card gap | 16 |
+| List item gap | 8 |
+| Safe area top (minimum) | 16 |
+| Safe area bottom (minimum) | 16 |
 
 ---
 
-# Icon Sizes
+## Border radius
+
+| Token | Value | Usage |
+|-------|------:|-------|
+| none | 0 | — |
+| xs | 4 | Inputs, small chips |
+| sm | 8 | Chips, tags |
+| md | 12 | Cards, buttons |
+| lg | 16 | Bottom sheets, hero cards |
+| xl | 24 | Large cards |
+| full | 9999 | Pills, avatars |
+
+Use rounded corners consistently. Avoid mixing multiple radius values within the same screen.
+
+---
+
+## Elevation / Shadows
+
+Subtle. Shadows communicate hierarchy, not decoration.
+
+| Level | Usage | Shadow |
+|------:|-------|--------|
+| 0 | Flat surfaces | Border only (borderLight) |
+| 1 | Cards | 0 2px 8px rgba(0,0,0,0.06) |
+| 2 | Floating search | 0 4px 12px rgba(0,0,0,0.08) |
+| 3 | Bottom sheets | 0 -8px 24px rgba(0,0,0,0.1) |
+| 4 | Dialogs | 0 8px 32px rgba(0,0,0,0.12) |
+
+---
+
+## Motion
+
+| Token | Duration | Usage |
+|-------|--------:|-------|
+| instant | 100ms | Press feedback, toggles |
+| fast | 150ms | Micro-interactions |
+| normal | 250ms | Screen transitions, sheets |
+| slow | 350ms | Complex reveals |
+| extraSlow | 500ms | Onboarding, celebration |
+
+Easing: ease-out for all transitions. See MOTION.md for detailed guidance.
+
+---
+
+## Icons
+
+| Property | Value |
+|----------|-------|
+| Style | Outlined |
+| Stroke | 2px |
+| Sizes | 16, 20, 24, 32 |
+
+Icons support text. Never replace labels with icons alone.
+
+---
+
+## Touch targets
 
 | Token | Size |
-|--------|-----:|
-| XS | 12 |
-| SM | 16 |
-| MD | 20 |
-| LG | 24 |
-| XL | 32 |
-| XXL | 40 |
-
----
-
-# Button Heights
-
-| Token | Height |
-|--------|-------:|
-| Small | 36 |
-| Medium | 44 |
-| Large | 52 |
-
----
-
-# Input Heights
-
-| Token | Height |
-|--------|-------:|
-| Small | 40 |
-| Medium | 48 |
-| Large | 56 |
-
----
-
-# Touch Targets
-
-| Token | Size |
-|--------|-----:|
+|-------|-----:|
 | Minimum | 48 × 48 |
 | Preferred | 56 × 56 |
 
 ---
 
-# Layout
+## Component sizes
 
-| Token | Value |
-|--------|------:|
-| Screen Padding | 24 |
-| Section Gap | 32 |
-| Component Gap | 24 |
-| Card Gap | 16 |
-| List Gap | 8 |
-| Safe Area Top | 16 |
-| Safe Area Bottom | 16 |
+| Component | Small | Medium | Large |
+|-----------|------:|-------:|------:|
+| Button height | 36 | 44 | 52 |
+| Input height | 40 | 48 | 56 |
 
 ---
 
-# Animation Duration
-
-| Token | Duration |
-|--------|----------:|
-| Instant | 100ms |
-| Fast | 150ms |
-| Normal | 250ms |
-| Slow | 350ms |
-| Extra Slow | 500ms |
-
----
-
-# Z-Index
+## Z-index
 
 | Layer | Value |
-|--------|------:|
+|-------|------:|
 | Base | 0 |
 | Header | 10 |
-| Floating Action | 20 |
-| Bottom Sheet | 30 |
+| Floating action | 20 |
+| Bottom sheet | 30 |
 | Dialog | 40 |
 | Toast | 50 |
 | Tooltip | 60 |
 
 ---
 
-# Breakpoints
+## Opacity
 
-| Device | Width |
-|--------|------:|
-| Small Mobile | 360 |
-| Mobile | 390 |
-| Large Mobile | 430 |
-| Tablet | 768 |
-| Desktop | 1024 |
+| Token | Value | Usage |
+|-------|------:|-------|
+| disabled | 38% | Disabled elements |
+| secondary | 60% | De-emphasized content |
+| overlay | 50% | Modal backdrop |
 
 ---
 
-# Naming Convention
+## Breakpoints
 
-All tokens should follow a consistent naming pattern.
-
-Examples
-
-Typography
-
-```
-font.body
-font.h1
-font.caption
-```
-
-Spacing
-
-```
-space.4
-space.8
-space.16
-```
-
-Radius
-
-```
-radius.sm
-radius.md
-radius.full
-```
-
-Colours
-
-```
-color.primary.500
-color.gray.200
-color.success.default
-```
-
-Components should always consume these tokens instead of using raw values.
+| Device | Width |
+|--------|------:|
+| Small mobile | 360 |
+| Mobile | 390 |
+| Large mobile | 430 |
+| Tablet | 768 |
+| Desktop | 1024 |

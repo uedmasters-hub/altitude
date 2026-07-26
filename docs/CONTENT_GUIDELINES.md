@@ -1,413 +1,104 @@
 # Content Guidelines
 
-> Project Altitude Content Guidelines
->
-> Version: 0.1 (MVP)
+Every word should help users complete their task. If text doesn't reduce uncertainty, guide the next action, or explain what's happening — remove it.
 
 ---
 
-# Purpose
+## Voice
 
-Content should help users complete tasks with confidence.
-
-Every word should reduce uncertainty, guide the next action, or explain what is happening.
-
-If text does not help users complete their task, remove it.
+Clear, calm, helpful, human, confident. Never promotional, robotic, technical, or overly casual.
 
 ---
 
-# Voice
+## Writing rules
 
-Project Altitude should sound:
+**Be clear.** Prefer simple words. "Book flight" not "Complete reservation."
 
-- Clear
-- Calm
-- Helpful
-- Human
-- Confident
+**Be concise.** "Continue" not "Continue to the next step."
 
-Avoid sounding:
+**Be direct.** "Select your departure airport" not "Please choose where you would like to depart from."
 
-- Promotional
-- Robotic
-- Technical
-- Overly casual
+**Sentence case everywhere.** "Passenger details" not "Passenger Details" or "PASSENGER DETAILS."
+
+**No emoji** in the product interface. Icons communicate meaning instead.
+
+**No punctuation** on buttons or titles. Descriptions use periods only when multi-sentence.
 
 ---
 
-# Writing Principles
+## Buttons
 
-## Be Clear
-
-Prefer simple words over complex ones.
-
-✓ Book Flight
-
-✗ Complete Reservation
-
----
-
-## Be Concise
-
-Keep labels short.
-
-Remove unnecessary words.
-
-✓ Continue
-
-✗ Continue to the Next Step
-
----
-
-## Be Direct
-
-Tell users exactly what will happen.
-
-✓ Select your departure airport.
-
-✗ Please choose where you would like to depart from.
-
----
-
-## Explain Only When Necessary
-
-Don't describe obvious actions.
-
-Avoid long instructions.
-
----
-
-# Buttons
-
-Buttons should begin with verbs whenever possible.
-
-Examples
-
-- Continue
-- Search
-- Book Flight
-- Confirm Payment
-- Retry
-- Cancel
-
-Avoid
-
-- Submit
-- Execute
-- Proceed
-
----
-
-# Navigation Labels
-
-Use
-
-- Home
-- Trips
-- Saved
-- Account
-
-Avoid abbreviations.
-
----
-
-# Airport Terminology
-
-Use
-
-```
-Delhi (DEL)
-```
-
-Avoid
-
-```
-DEL
-```
-
-without the city name.
-
----
-
-# Flight Terminology
-
-Use
-
-- Depart
-- Return
-- Non-stop
-- One Stop
-- Duration
-- Fare
-
-Avoid
-
-- Outbound
-- Inbound
-- Sector
-
----
-
-# Recommendation Labels
-
-Preferred
-
-- Best Value
-- Cheapest
-- Fastest
-- Most Flexible
-
-Avoid
-
-- Option 1
-- AI Pick
-- Recommended #1
-
----
-
-# Dates
-
-Preferred
-
-```
-Tue, 12 Aug
-```
-
-Long Format
-
-```
-Tuesday, 12 August 2025
-```
-
-Avoid numeric-only formats.
-
----
-
-# Time
-
-Use 24-hour format.
-
-Example
-
-```
-09:45
-18:20
-```
-
----
-
-# Currency
-
-Use the user's local currency.
-
-Examples
-
-₹7,250
-
-£340
-
-$540
-
-Always include the currency symbol.
-
----
-
-# Numbers
-
-1–9
-
-Spell only in marketing content.
-
-Product UI should use numerals.
-
-Examples
-
-2 Adults
-
-1 Stop
-
-16 Seats Left
-
----
-
-# Empty States
-
-Every empty state should answer:
-
-What happened?
-
-What should I do next?
-
-Example
-
-Title
-
-No flights found
-
-Description
-
-Try changing your travel dates or destination.
-
-Action
-
-Change Dates
-
----
-
-# Error Messages
-
-Every error should explain:
-
-- What happened
-- What users can do next
-
-Good
-
-Payment couldn't be completed.
-
-Please try another payment method.
-
-Bad
-
-Unknown Error
-
----
-
-# Success Messages
-
-Keep them short.
-
-Examples
-
-Booking Confirmed
-
-Payment Successful
-
-Trip Saved
-
----
-
-# Confirmation Dialogs
-
-Always explain the consequence.
-
-Example
-
-Cancel booking?
-
-Your booking won't be saved.
-
-Buttons
-
-Keep Editing
-
-Cancel Booking
-
----
-
-# Loading Messages
-
-Avoid
-
-Loading...
-
-Prefer contextual loading.
-
-Examples
-
-Searching flights...
-
-Finding the best fares...
-
-Preparing your booking...
-
----
-
-# Capitalisation
-
-Use sentence case throughout the product.
-
-Examples
-
-Book flight
-
-Passenger details
-
-Payment method
-
-Avoid
-
-BOOK FLIGHT
-
-Book Flight
-
----
-
-# Punctuation
-
-Avoid unnecessary punctuation.
-
-Buttons should not end with periods.
-
-Titles should not end with punctuation.
-
----
-
-# Emoji
-
-Do not use emoji in the product interface.
-
-Icons should communicate meaning instead.
-
----
-
-# Accessibility
-
-Never rely solely on colour to communicate meaning.
-
-All important information should be available as text.
-
----
-
-# Do
-
-✓ Use familiar travel terms.
-
-✓ Keep sentences short.
-
-✓ Focus on the next action.
-
-✓ Write for first-time travellers.
-
-✓ Use consistent terminology.
-
----
-
-# Don't
-
-✗ Use marketing language.
-
-✗ Over-explain.
-
-✗ Use technical aviation terms.
-
-✗ Change terminology between screens.
-
-✗ Introduce new labels for the same action.
-
----
-
-# Preferred Terminology
+Start with a verb. Use the same label through the whole flow — if the button says "Book flight", the confirmation says "Flight booked."
 
 | Use | Avoid |
-|------|-------|
+|-----|-------|
+| Continue | Proceed |
+| Search | Submit |
+| Book flight | Complete reservation |
+| Confirm payment | Execute payment |
+| Retry | Try again |
+
+---
+
+## Terminology
+
+| Use | Avoid |
+|-----|-------|
 | Depart | Outbound |
 | Return | Inbound |
-| Continue | Proceed |
-| Book Flight | Complete Reservation |
-| Best Value | Recommended #1 |
-| Non-stop | Direct Flight* |
-| Passenger | Traveller* |
+| Non-stop | Direct flight |
+| Passenger | Traveller |
 | Booking | Reservation |
+| Best value | Recommended #1 |
+| Fare | Price (in technical contexts) |
 
-*Use only if required by airline or regulatory content.
+---
+
+## Formatting
+
+**Airports:** City name with code — "Delhi (DEL)". Never bare IATA codes.
+
+**Dates:** "Tue, 12 Aug" (short) or "Tuesday, 12 August 2025" (long). No numeric-only formats.
+
+**Time:** 24-hour — "09:45", "18:20".
+
+**Currency:** Symbol with amount — "₹7,250", "£340", "$540". Always include the symbol.
+
+**Numbers:** Numerals in product UI — "2 Adults", "1 Stop", "16 seats left."
+
+---
+
+## Loading messages
+
+Contextual, not generic. "Searching flights..." not "Loading..."
+
+Examples: "Finding the best fares...", "Preparing your booking..."
+
+---
+
+## Empty states
+
+Answer three questions: What happened? Why? What should I do?
+
+Title: "No flights found"
+Description: "Try changing your travel dates or destination."
+Action: "Change dates"
+
+---
+
+## Error messages
+
+Explain what happened and what to do next. Write like a human.
+
+Good: "Payment couldn't be completed. Try another payment method."
+Bad: "Unknown Error"
+
+---
+
+## Confirmation dialogs
+
+Explain the consequence. Label buttons with the actual action, not "Yes" / "No."
+
+Title: "Cancel booking?"
+Description: "Your booking won't be saved."
+Buttons: "Keep editing" / "Cancel booking"

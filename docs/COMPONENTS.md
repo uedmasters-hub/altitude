@@ -1,391 +1,168 @@
 # Components
 
-> Project Altitude Components
->
-> Version: 0.1 (MVP)
+Reusable building blocks in `components/ui/`. Import from the barrel:
+
+```tsx
+import { Text, Button, Surface, Screen } from '../components/ui';
+```
+
+Rules: every component solves one problem, follows design tokens, supports required states. Before creating a new primitive, check whether an existing one can do the job. A component earns a place in `ui/` only when it's used on 2+ screens — until then, keep it local to the screen file.
 
 ---
 
-# Overview
+## Primitives (implemented)
 
-Components are reusable building blocks that create a consistent experience across Project Altitude.
+### Text
 
-Every component should:
+Typed wrapper over RN Text. Never import `Text` from `react-native` in screens.
 
-- Solve a single problem
-- Be reusable
-- Behave consistently
-- Follow the Design System
+| Prop | Type | Default | Notes |
+|------|------|---------|-------|
+| variant | typography key | body | display, h1, h2, bodyLarge, body, bodyMedium, bodySmall, caption, label |
+| color | color token key | text | Any key from the colors object |
+| align | left, center, right | left | — |
 
----
+```tsx
+<Text variant="display">Where to?</Text>
+<Text variant="caption" color="textSecondary">Non-stop</Text>
+```
 
-# Button
+### Button
 
-Buttons trigger user actions.
+One primary button per screen. Full-width by default for thumb-first.
 
-## Variants
+| Prop | Type | Default |
+|------|------|---------|
+| variant | primary, secondary, ghost | primary |
+| size | md (44px), lg (52px) | lg |
+| loading | boolean | false |
+| disabled | boolean | false |
 
-- Primary
-- Secondary
-- Ghost
-- Text
-- Icon
+States: default, pressed, disabled, loading.
 
-## States
+```tsx
+<Button label="Search flights" onPress={search} />
+<Button label="Change dates" onPress={edit} variant="secondary" />
+<Button label="Skip" onPress={skip} variant="ghost" size="md" />
+```
 
-- Default
-- Hover
-- Pressed
-- Focused
-- Disabled
-- Loading
+### Surface
 
-## Usage
+Card container. Cards represent meaningful objects (destination, flight, recommendation) — never dashboards.
 
-Use one Primary button per screen whenever possible.
+| Prop | Type | Default |
+|------|------|---------|
+| elevation | flat, raised, overlay | flat |
+| padded | boolean | true |
 
-Examples
+```tsx
+<Surface elevation="raised">
+  <Text variant="h2">Delhi → Goa</Text>
+</Surface>
+```
 
-- Continue
-- Book Flight
-- Confirm Payment
+### Screen
 
----
+Safe-area wrapper enforcing thumb-first layout. Every screen wraps content in this.
 
-# Input
+| Prop | Type | Default |
+|------|------|---------|
+| anchor | bottom, top | bottom |
+| edges | safe area edges array | ['top'] |
 
-Used to collect user information.
+Bottom anchor (default) pushes content to the bottom third. Use `top` for scrollable lists.
 
-## Types
+```tsx
+<Screen>               {/* content at bottom */}
+<Screen anchor="top">  {/* scrollable list */}
+```
 
-- Search
-- Text
-- Email
-- Phone
-- Number
+### Input
 
-## States
+Text input with optional label and icon.
 
-- Default
-- Focus
-- Filled
-- Error
-- Disabled
+| Prop | Type | Default |
+|------|------|---------|
+| label | string | — |
+| icon | ReactNode | — |
 
----
+States: default, focused, filled, error, disabled. Search is the primary input pattern throughout the product.
 
-# Search
+```tsx
+<Input placeholder="Search airports" />
+<Input label="From" placeholder="Delhi (DEL)" icon={<PlaneIcon />} />
+```
 
-Search is the primary interaction pattern within Project Altitude.
+### Tag
 
-## Variants
+Recommendation badges tied to `RecommendationTag` type. Concise and non-interactive.
 
-- Expanded
-- Collapsed
-- Active
-- Loading
-- Empty
-- Results
+```tsx
+<Tag tag="bestValue" />   {/* purple "Best value" */}
+<Tag tag="cheapest" />    {/* green "Cheapest" */}
+<Tag tag="fastest" />     {/* blue "Fastest" */}
+```
 
-## Used For
+### Row
 
-- Airport Search
-- Destination Search
+Horizontal layout with gap control.
 
----
+```tsx
+<Row gap="md" justify="space-between">
+  <Text>DEL → BOM</Text>
+  <Text variant="bodyMedium">₹4,200</Text>
+</Row>
+```
 
-# Card
+### ListRow
 
-Cards represent meaningful information.
+Pressable row for lists (airports, flights). Large touch targets, consistent spacing.
 
-## Variants
+```tsx
+<ListRow onPress={() => selectAirport(airport)}>
+  <Text variant="bodyMedium">{airport.city}</Text>
+  <Text variant="caption" color="textSecondary">{airport.iata}</Text>
+</ListRow>
+```
 
-- Destination Card
-- Flight Card
-- Recommendation Card
-- Journey Card
+### Divider
 
-Cards should never become dashboards.
+Hairline separator. Prefer whitespace over separators — use only when groups need visual distinction.
 
----
-
-# List
-
-Lists display collections of information.
-
-## Variants
-
-- Airport List
-- Flight List
-- Destination List
-
-Lists should remain easy to scan and avoid unnecessary separators.
-
----
-
-# Calendar
-
-Used for selecting travel dates.
-
-## Variants
-
-- Single Date
-- Round Trip
-- Flexible Dates
-
-Additional information such as fare trends may be layered on top without replacing the calendar.
+```tsx
+<Divider />
+<Divider spacing="lg" />
+```
 
 ---
 
-# Price Histogram
+## Planned components (not yet built)
 
-Visualises fare trends.
+These will be implemented as screens require them.
 
-## Usage
+**Bottom Sheet** — preferred over full-screen for selection workflows (airport search, passenger selection, cabin class, fare details). Supports collapsed, half-expanded, and fully expanded. Animates from bottom, follows gesture.
 
-- Cheapest dates
-- Price comparison
-- Flexible travel
+**Calendar** — standard monthly grid for date selection. Enhanced with fare highlights, not replaced. Supports single date and range.
 
-This component supplements the calendar.
+**Stepper** — increment/decrement control for passenger counts. No dropdowns.
 
----
+**Skeleton Loader** — loading placeholder matching content shape. Preferred over spinners.
 
-# Chip
+**Toast** — short feedback ("Saved", "Copied"). Disappears automatically, never requires interaction.
 
-Used to communicate short pieces of information.
+**Dialog** — confirmation only (cancel booking, discard changes). Always provides primary and secondary action.
 
-## Variants
-
-- Best Value
-- Cheapest
-- Fastest
-- Refundable
-- Direct
-
-Chips should be concise and non-interactive unless filtering.
+**Accordion** — reveals secondary info (fare rules, baggage, cancellation). Collapsed by default.
 
 ---
 
-# Badge
-
-Highlights status.
-
-## Variants
-
-- Success
-- Warning
-- Error
-- Information
-
-Badges communicate state rather than actions.
-
----
-
-# Bottom Navigation
-
-Primary navigation across the application.
-
-## Items
-
-- Explore
-- Trips
-- Saved
-- Account
-
-Maximum of five items.
-
----
-
-# App Bar
-
-Provides page-level navigation.
-
-## Elements
-
-- Back
-- Close
-- Title
-- Actions
-
-Only include actions relevant to the current screen.
-
----
-
-# Bottom Sheet
-
-Preferred pattern for selection workflows.
-
-## Used For
-
-- Airport Selection
-- Passenger Selection
-- Cabin Class
-- Filters
-- Fare Details
-
-Supports:
-
-- Collapsed
-- Half Expanded
-- Fully Expanded
-
----
-
-# Modal
-
-Reserved for confirmation and interruption.
-
-## Examples
-
-- Cancel Booking
-- Discard Changes
-- Delete Passenger
-
-Avoid using modals for navigation.
-
----
-
-# Dialog
-
-Used when immediate user confirmation is required.
-
-Should always provide:
-
-- Primary Action
-- Secondary Action
-
----
-
-# Toast
-
-Displays lightweight feedback.
-
-## Examples
-
-- Saved
-- Copied
-- Booking Updated
-
-Should disappear automatically.
-
----
-
-# Alert
-
-Communicates important information.
-
-## Types
-
-- Success
-- Warning
-- Error
-- Information
-
-Alerts require user attention.
-
----
-
-# Tooltip
-
-Provides contextual help.
-
-Use sparingly.
-
-Never rely on tooltips to explain essential functionality.
-
----
-
-# Accordion
-
-Reveals secondary information.
-
-## Examples
-
-- Fare Rules
-- Baggage Details
-- Cancellation Policy
-
-Collapsed by default.
-
----
-
-# Tabs
-
-Used to switch between related content.
-
-## Examples
-
-- Cheapest
-- Fastest
-- Best Value
-
-Limit to 2–5 tabs.
-
----
-
-# Stepper
-
-Displays progress through a multi-step flow.
-
-## Examples
-
-- Search
-- Passenger Details
-- Payment
-- Confirmation
-
-Use only when progress benefits the user.
-
----
-
-# Skeleton Loader
-
-Represents content while loading.
-
-## Variants
-
-- Card
-- List
-- Flight
-- Destination
-
-Prefer skeletons over spinners whenever possible.
-
----
-
-# Empty State
-
-Appears when no content is available.
-
-Every empty state should include:
-
-- Explanation
-- Next action
-
----
-
-# Error State
-
-Displayed when an operation cannot be completed.
-
-Should include:
-
-- What happened
-- What users can do next
-
-Avoid technical language.
-
----
-
-# Component Rules
-
-Every component should:
-
-- Solve one problem.
-- Be reusable.
-- Support all required states.
-- Follow Design Tokens.
-- Follow Accessibility guidelines.
-
-Before creating a new component, check whether an existing component can solve the same problem.
+## Component rules
+
+- One primary button per screen
+- Cards don't become dashboards — one object per card
+- Lists avoid unnecessary separators — whitespace is preferred
+- Every interactive element needs a visible focus state
+- Every icon-only action needs an accessible label
+- Loading: skeleton loaders over spinners
+- Empty states answer: what happened? What should I do?
+- Error states answer: what went wrong? What can I do next?
