@@ -17,3 +17,5 @@ export { Divider } from './Divider';
 export { Row } from './Row';
 export { Screen } from './Screen';
 export { ListRow } from './ListRow';
+export { Sheet } from './Sheet';
+export { Plane } from './Plane';

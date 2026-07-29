@@ -18,12 +18,29 @@
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "versionCode": 1,
+      "edgeToEdgeEnabled": true
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFFFF"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "06f01e98-5459-41d6-9b3d-26f7b7d8b0dd"
       }
     },
-    "web": {
-      "bundler": "metro",
-      "favicon": "./assets/favicon.png"
+    "runtimeVersion": {
+      "policy": "appVersion"
     },
-    "plugins": ["expo-router"]
+    "updates": {
+      "url": "https://u.expo.dev/06f01e98-5459-41d6-9b3d-26f7b7d8b0dd"
+    }
   }
 }
